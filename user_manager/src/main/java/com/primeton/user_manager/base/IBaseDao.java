@@ -1,6 +1,7 @@
 package com.primeton.user_manager.base;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IBaseDao<T> {
 
@@ -10,8 +11,8 @@ public interface IBaseDao<T> {
 	
 	public void update(T t);
 	
-	public List<T> findAll();
-	
+
+
 	public int count();
 	
 }

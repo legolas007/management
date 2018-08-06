@@ -4,7 +4,7 @@ spring:
 zuul:
   routes:
     user_manager:
-      path: /user/**
+      path: /user_manager/**
     goods:
       path: /goods/**
 server:

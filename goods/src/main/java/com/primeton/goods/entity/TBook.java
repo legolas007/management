@@ -11,7 +11,7 @@ import javax.persistence.Id;
  * @Description:
  */
 @Data
-@Entity
+@Entity//jpa设置
 public class TBook {
     @Id
     @GeneratedValue//自增主键

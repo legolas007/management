@@ -14,8 +14,5 @@ public class PageBean<T> implements Serializable {
 	private Integer size = 4;
 	private Integer count;
 	private List<T> pageInfos;
-
-	
-	
 	
 }

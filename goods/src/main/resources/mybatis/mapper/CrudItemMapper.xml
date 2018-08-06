@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间要唯一 -->
+<mapper namespace="com.primeton.goods.dao.CrudItemDao"><!-- 命名空间习惯上命名为包名+类名的形式 -->
+
+    <resultMap type="order" id="orderMapper">
+        <id property="id" column="oid"/>
+    </resultMap>
+
+    <resultMap type="book" id="bookMapper">
+
+        <id property="id" column="bid"/>
+        <result property="bookname" column="bookname"/>
+        <result property="price" column="price"/>
+        <result property="img" column="img"/>
+
+    </resultMap>
+
+    <resultMap type="item" id="itemMapper">
+
+        <id property="id" column="id"/>
+        <result property="num" column="num"/>
+        <association property="order" resultMap="orderMapper"></association>
+        <association property="book" resultMap="bookMapper"></association>
+
+    </resultMap>
+
+
+    <select id="countItemByBookId" parameterType="int" resultType="int">
+		select count(1) from t_orderitems WHERE bookId = #{bookId}
+	</select>
+
+    <select id="findOrderItemByOrderId" parameterType="int" resultMap="itemMapper">
+		SELECT item.id, item.num, b.id bid, b.bookname, b.price, b.img, o.id oid
+		FROM t_orderitems item
+		INNER JOIN t_orders o ON item.orderId = o.id
+		INNER JOIN t_book b ON item.bookId = b.id
+		WHERE item.orderId = #{orderId}
+	</select>
+
+</mapper>
+
+
+
+
+
+
+

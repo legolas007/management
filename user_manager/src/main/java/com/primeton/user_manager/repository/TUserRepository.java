@@ -12,4 +12,6 @@ import java.util.Map;
  */
 public interface TUserRepository extends JpaRepository<TUser,Integer> {
     TUser findByUsername(String name);
+
+    void deleteTUserById(Integer id);
 }
