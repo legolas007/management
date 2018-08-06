@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: user_manager
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://116.196.113.135:3306/shop?characterEncoding=UTF8&useSSL=false
+    username: root
+    password: 123456
+server:
+  port: 8081
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+
+
