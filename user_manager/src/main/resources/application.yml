@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user-manager
+    name: user
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://116.196.113.135:3306/shopuser?characterEncoding=UTF8&useSSL=false

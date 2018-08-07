@@ -17,7 +17,7 @@ import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@EnableFeignClients
+//@EnableFeignClients
 @MapperScan(value = "com.primeton.user_manager.dao")
 //解决jmx重复注册bean的问题
 @EnableMBeanExport(registration = RegistrationPolicy.IGNORE_EXISTING)
@@ -31,11 +31,13 @@ public class UserManagerApplication {
 		return "serviceA";
 	}*/
 
+/*
 	@Bean
 	@LoadBalanced
 	RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(UserManagerApplication.class, args);

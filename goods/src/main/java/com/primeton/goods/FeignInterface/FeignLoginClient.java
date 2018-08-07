@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Author: Usher
  * @Description:
  */
-@FeignClient(value = "user-manager")
+@FeignClient(value = "user")
 public interface FeignLoginClient {
 
     @PostMapping(value = "/proxyLogin")

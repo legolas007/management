@@ -17,7 +17,8 @@ import javax.servlet.http.HttpServletRequest;
  * @Description:
  */
 @RestController
-@RequestMapping("/userManager")
+@RequestMapping
+@CrossOrigin
 public class UserController {
 
     @Autowired

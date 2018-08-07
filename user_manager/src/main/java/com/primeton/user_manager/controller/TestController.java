@@ -12,11 +12,11 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 public class TestController {
 
-    @Autowired
+    /*@Autowired
     private RestTemplate restTemplate;
 
     @RequestMapping("/hello")
     public String string() {
         return restTemplate.getForEntity("http://goods/serviceB", String.class).getBody();
-    }
+    }*/
 }

@@ -17,20 +17,20 @@
 	</resultMap>
 	
 	<select id="findAll" parameterType="map" resultMap="userMapper">
-		SELECT id, username, password, email, isLock FROM t_user LIMIT #{index}, #{size}
+		SELECT id, username, password, email, isLock FROM tuser LIMIT #{index}, #{size}
 	</select>
 	
 	
 	<update id="updateLockStatus" parameterType="int">
-		UPDATE t_user SET islock = 0 WHERE id = #{id};	
+		UPDATE tuser SET islock = 0 WHERE id = #{id};	
 	</update>
 	
 	<select id="count" resultType="int">		
-		select count(1) from t_user
+		select count(1) from tuser
 	</select>
 	
 	<select id="delete" parameterType="int">
-		DELETE FROM t_user WHERE id = #{id}
+		DELETE FROM tuser WHERE id = #{id}
 	</select>
 	
 </mapper>

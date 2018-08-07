@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 命名空间需要使用接口的全路径 -->
+<mapper namespace="com.qianfeng.dao.IOrderItemDao">
+
+	<resultMap type="user" id="userMapper">
+		
+		<id property="id" column="uid"/>
+		<result property="userName" column="username"/>
+		<result property="password" column="password"/>
+		<result property="rePassWord" column="rePassWord"/>
+		<result property="email" column="email"/>
+		<result property="isLock" column="islock"/>
+		
+	</resultMap>
+
+
+	<resultMap type="order" id="orderMapper">
+		<id property="id" column="oid"/>
+		<result property="orderNum" column="ordernum"/>
+		<result property="totalPrice" column="totalprice"/>
+		<result property="createDate" column="createdate"/>
+		<result property="state" column="state"/>
+		<!-- 体现表之间一的关系 -->
+		<association property="buyer" resultMap="userMapper"></association>
+	</resultMap>
+	
+	<resultMap type="books" id="bookMapper">
+		<id property="id" column="bid"/>
+		<result property="bookName" column="bookname"/>
+		<result property="price" column="price"/>
+		<result property="stock" column="stock"/>
+		<result property="img" column="img"/>
+	</resultMap>
+
+	<resultMap type="item" id="itemMapper">
+
+		<id property="id" column="id"></id>
+		<result property="num" column="num" />
+		<!-- 嵌套结果 -->
+		<association property="order" resultMap="orderMapper"></association>
+		<association property="book" resultMap="bookMapper"></association>
+	
+	</resultMap>
+	
+	<insert id="add" parameterType="item">
+		insert into t_orderitems(orderId, bookId, num)
+		values (#{order.id}, #{book.id}, #{num});
+	</insert>
+	
+	
+	<select id="findByIndex" parameterType="map" resultMap="itemMapper">
+		select item.*, o.id oid, o.ordernum, o.totalprice, o.createdate, o.state, o.buyerId, 
+			b.id bid, b.bookname, b.price, b.stock, b.img, u.id uid, u.username from t_orders o
+		INNER JOIN t_orderitems item
+		on o.id = item.orderId
+		INNER JOIN t_book b
+		on b.id = item.bookId
+		INNER JOIN t_user u
+		on u.id = o.buyerId
+		WHERE u.username = #{username} and o.id
+		IN (SELECT t.id FROM (SELECT id from t_orders WHERE buyerId = #{buyerId} limit #{index},#{size} ) t)
+		ORDER BY orderId, bookId
+	</select>
+	
+</mapper>

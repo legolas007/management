@@ -18,13 +18,18 @@ import java.io.File;
  * @Description:
  */
 @RestController
-@RequestMapping("/bookManager")
+@CrossOrigin
 public class CrudController {
     @Autowired
     private BookService bookService;
 
     @Autowired
     private FeignLoginClient feignLoginClient;
+
+    @GetMapping("/bookdao")
+    public TBook bookdao(Integer id) {
+        return bookService.findBookById(id);
+    }
 
     @GetMapping
     public String root() {
