@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://gitee.com/usher_ou/config-repo
+          username: usher_ou
+          password: 6868939597ok
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
+
+server:
+  port: 1201
+
+management:
+  endpoints:
+    web:
+      expose: "*"

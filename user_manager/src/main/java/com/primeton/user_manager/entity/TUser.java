@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @Author: Usher
@@ -13,6 +14,7 @@ import javax.persistence.Id;
 
 @Data
 @Entity
+@Table(name = "t_user")
 public class TUser {
 
     @Id

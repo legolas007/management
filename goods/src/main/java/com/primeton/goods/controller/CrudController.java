@@ -38,10 +38,10 @@ public class CrudController {
 
     @GetMapping("/bookList/{page}")
     public JsonBean findBookByIndex(@PathVariable("page")Integer cur, HttpServletRequest request) {
-        JsonBean jsonBean = feignLoginClient.validata(request);
+/*        JsonBean jsonBean = feignLoginClient.validata(request);
         if (jsonBean.getCode() == 0) {
             return jsonBean;
-        }
+        }*/
 
         JsonBean bean = new JsonBean();
 

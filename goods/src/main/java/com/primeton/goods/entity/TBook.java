@@ -11,10 +11,8 @@ import javax.persistence.Id;
  * @Description:
  */
 @Data
-@Entity//jpa设置
 public class TBook {
-    @Id
-    @GeneratedValue//自增主键
+
     private Integer id;
 
     private String bookname;

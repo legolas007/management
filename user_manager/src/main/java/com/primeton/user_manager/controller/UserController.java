@@ -29,28 +29,7 @@ public class UserController {
 
     @GetMapping("userList/{page}")
     public JsonBean findAllUser(@PathVariable("page")int currentPage, HttpServletRequest request) {
-        if (request.getCookies() == null) {
-            JsonBean bean = new JsonBean();
-            bean.setCode(0);
-            bean.setMsg("请登录！");
-            return bean;
-        } else {
-            Cookie[] cookies = request.getCookies();
 
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("loginname")) {
-                    TUser user = repository.findByUsername(cookie.getValue());
-                    if (user.getIslock() != 0) {
-                        JsonBean bean = new JsonBean();
-                        bean.setCode(0);
-                        bean.setMsg("请登录！");
-                        return bean;
-                    }
-
-                }
-            }
-
-        }
         JsonBean bean = new JsonBean();
 
         try {
@@ -70,28 +49,7 @@ public class UserController {
 
     @PostMapping("unlock/{id}")
     public JsonBean unlockUser(@PathVariable("id") int id,HttpServletRequest request) {
-        if (request.getCookies() == null) {
-            JsonBean bean = new JsonBean();
-            bean.setCode(0);
-            bean.setMsg("请登录！");
-            return bean;
-        } else {
-            Cookie[] cookies = request.getCookies();
 
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("loginname")) {
-                    TUser user = repository.findByUsername(cookie.getValue());
-                    if (user.getIslock() != 0) {
-                        JsonBean bean = new JsonBean();
-                        bean.setCode(0);
-                        bean.setMsg("请登录！");
-                        return bean;
-                    }
-
-                }
-            }
-
-        }
         JsonBean bean = new JsonBean();
 
         try {
@@ -111,28 +69,7 @@ public class UserController {
 
     @PostMapping("user/{id}")
     public JsonBean deleteUser(@PathVariable("id") int id,HttpServletRequest request) {
-        if (request.getCookies() == null) {
-            JsonBean bean = new JsonBean();
-            bean.setCode(0);
-            bean.setMsg("请登录！");
-            return bean;
-        } else {
-            Cookie[] cookies = request.getCookies();
 
-            for (Cookie cookie : cookies) {
-                if (cookie.getName().equals("loginname")) {
-                    TUser user = repository.findByUsername(cookie.getValue());
-                    if (user.getIslock() != 0) {
-                        JsonBean bean = new JsonBean();
-                        bean.setCode(0);
-                        bean.setMsg("请登录！");
-                        return bean;
-                    }
-
-                }
-            }
-
-        }
 
         JsonBean bean = new JsonBean();
         try {
