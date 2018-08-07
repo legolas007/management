@@ -3,6 +3,7 @@ package com.primeton.goods.service.impl;
 import com.primeton.goods.dao.IBookDao;
 import com.primeton.goods.entity.TBook;
 import com.primeton.goods.service.BookService;
+import com.primeton.goods.service.ComUtil;
 import com.primeton.goods.vo.PageBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,21 +121,67 @@ public class BookServiceImpl implements BookService {
      */
     @Override
     public int deleteBook(Integer id) {
-        return 0;
+        try {
+            bookDao.deleteBook(id);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw e;
+        }
+
+        return 1;
     }
 
     @Override
     public void addBook(TBook book) {
-
+        try {
+            bookDao.add(book);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     @Override
     public TBook findBookById(Integer id) {
-        return null;
+        TBook book = null;
+
+        try {
+            book = bookDao.findById(id);
+        } catch (Exception e) {
+            throw e;
+        }
+
+
+        if(book == null) {
+            throw new RuntimeException("图书不存在");
+        }
+
+        return book;
     }
 
     @Override
     public void updateBookWithRes(Integer resBookId, TBook book) {
+        TBook newBook = null;
 
+        newBook = findBookById(resBookId);
+
+        if(!newBook.getBookname().equals(book.getBookname())) {
+            newBook.setBookname(book.getBookname());
+        }else if(!newBook.getPrice().equals(book.getPrice())) {
+            newBook.setPrice(book.getPrice());
+        }else if(!newBook.getStock().equals(book.getStock())) {
+            newBook.setStock(book.getStock());
+        }else if(!ComUtil.StringIsEmpty(book.getImg()) && !newBook.getImg().equals(book.getImg())) {
+            newBook.setImg(book.getImg());
+        }
+
+        try {
+            bookDao.update(newBook);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            throw e;
+        }
     }
 }

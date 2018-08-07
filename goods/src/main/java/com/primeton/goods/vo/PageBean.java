@@ -14,9 +14,9 @@ public class PageBean<T> implements Serializable {
     private static final long serialVersionUID = 2587400287343042431L;
     private Integer currentPage;
     private Integer totalPage;
-    private Integer size = 4;// ÿҳ��ʾ�ļ�¼��
-    private Integer count; //�ܼ�¼��
-    private List<T> pageInfos;// ÿҳ��ѯ���ķ�ҳ����
+    private Integer size = 4;
+    private Integer count;
+    private List<T> pageInfos;
 
 
 

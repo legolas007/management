@@ -20,12 +20,12 @@
 		UPDATE t_book SET isDelete = 1 WHERE id = #{id}
 	</update>
 
-	<insert id="add" parameterType="book">
+	<insert id="add" parameterType="books">
 		INSERT INTO t_book(bookname, price, stock, img) VALUES(#{bookname}, #{price}, #{stock}, #{img});
 	</insert>
 
 
-	<update id="update" parameterType="book">
+	<update id="update" parameterType="books">
 		UPDATE t_book
 		SET
 		bookname = #{bookname},

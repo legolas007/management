@@ -2,13 +2,12 @@ package com.primeton.user_manager.controller;
 
 import com.primeton.user_manager.dto.TUserDto;
 import com.primeton.user_manager.entity.TUser;
+import com.primeton.user_manager.repository.TUserRepository;
 import com.primeton.user_manager.service.impl.LoginServiceImpl;
+import com.primeton.user_manager.util.JsonUtil;
 import com.primeton.user_manager.vo.JsonBean;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -26,8 +25,48 @@ public class LoginController {
     @Autowired
     private LoginServiceImpl loginService;
 
-    @PostMapping("/login")
-    public JsonBean login(@RequestParam("userName")String username, @RequestParam("passWord")String password, HttpServletResponse response){
+    @Autowired
+    private TUserRepository repository;
+
+    /**
+     * 测试
+     * @return
+     */
+    @GetMapping("/hello")
+    public String hello() {
+        return "sdsd";
+    }
+
+    @GetMapping("/validata")
+    public JsonBean validata(HttpServletRequest request) {
+
+        if (request.getCookies() == null) {
+            JsonBean bean = new JsonBean();
+            bean.setCode(0);
+            bean.setMsg("请登录！");
+            return bean;
+        } else {
+            Cookie[] cookies = request.getCookies();
+
+            for (Cookie cookie : cookies) {
+                if (cookie.getName().equals("loginname")) {
+                    TUser user = repository.findByUsername(cookie.getValue());
+                    if (user.getIslock() == 0) {
+                        JsonBean bean = new JsonBean();
+                        bean.setCode(1);
+                        return bean;
+                    }
+
+                }
+            }
+        }
+        JsonBean bean = new JsonBean();
+        bean.setCode(0);
+        bean.setMsg("权限不够！");
+        return bean;
+    }
+    @PostMapping("/proxyLogin")
+    public  JsonBean proxyLogin(@RequestParam("userName")String username, @RequestParam("passWord")String password, HttpServletResponse response){
 
         JsonBean bean = new JsonBean();
 

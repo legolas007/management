@@ -7,25 +7,14 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableDiscoveryClient
-@RestController
+@EnableFeignClients
 public class GoodsApplication {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(GoodsApplication.class);
 
-    @Autowired
-    private DiscoveryClient discoveryClient;
-
-	@GetMapping("/serviceB")
-	public String serviceB(){
-		LOGGER.info("serviceB");
-        return "Services:" + discoveryClient.getServices();
-	}
 	public static void main(String[] args) {
 		SpringApplication.run(GoodsApplication.class, args);
 	}

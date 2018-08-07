@@ -14,7 +14,7 @@ public interface IBookDao extends IBaseDao<TBook> {
 	
 
 	 List<TBook> findByIndex(Map<String, Object> pageInfo);
-	
+	void deleteBook(Integer id);
 
 	 List<TBook> findByIds(List<String> ids);
 	List<TBook> findByIds(String[] split);

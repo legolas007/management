@@ -18,8 +18,6 @@
     <typeAliases>
         <typeAlias type="com.primeton.goods.entity.TBook" alias="books"/>
 
-        <typeAlias type="com.primeton.goods.entity.CrudItem" alias="item"/>
-
     </typeAliases>
 
     <mappers>
