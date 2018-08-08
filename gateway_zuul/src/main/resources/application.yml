@@ -3,10 +3,12 @@ spring:
     name: gateway
 zuul:
   routes:
-    user_manager:
-      path: /user_manager/**
+    user:
+      path: /user/**
     goods:
       path: /goods/**
+    order:
+      path: /order/**
   host:
     connect-timeout-millis: 100000
     socket-timeout-millis: 600000

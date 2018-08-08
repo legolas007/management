@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.qianfeng.dao.IOrderDao">
+<!-- 命名空间要唯一 -->
+<mapper namespace="com.primeton.order.dao.IOrderDao"><!-- 命名空间习惯上命名为包名+类名的形式 -->
+
+	<resultMap type="user" id="userMapper">
+		<id property="id" column="uid"/>
+		<result property="username" column="username"/>
+		
+	</resultMap>
 
 	<resultMap type="order" id="orderMapper">
 		<id property="id" column="id"/>
@@ -10,39 +18,45 @@
 		<result property="totalPrice" column="totalprice"/>
 		<result property="createDate" column="createdate"/>
 		<result property="state" column="state"/>
-		<!-- 体现表之间一的关系 -->
-		<association property="buyer" resultMap="com.qianfeng.dao.IUserDao.userMapper"></association>
+		<association property="buyer" resultMap="userMapper"></association>
 	</resultMap>
-
-	 <!-- useGeneratedKeys="true" keyProperty="id" 获取自增的值 -->
-	<insert id="add" parameterType="order" useGeneratedKeys="true" keyProperty="id">
-		insert into t_orders(ordernum, totalprice, createdate, state, buyerId) 
-		values (#{orderNum}, #{totalPrice}, #{createDate}, 0, #{buyer.id})
-	</insert>
-
+	
+	<update id="updateStatus" parameterType="map">
+		UPDATE t_orders SET state = #{newStatus} WHERE id = #{orderId}		
+	</update>
+	
+	<select id="findAll" parameterType="map" resultMap="orderMapper">
+		SELECT o.id, o.ordernum, o.buyerId uid, o.totalprice, o.createdate, o.state, u.username 
+		FROM t_orders o INNER JOIN t_user u ON o.buyerId = u.id 
+		LIMIT #{index}, #{size}
+	</select>
+	
 	<select id="count" resultType="int">
 		select count(1) from t_orders
 	</select>
 	
-	<select id="countByBuyerId" parameterType="int" resultType="int">
-		select count(1) from t_orders WHERE buyerId = #{buyerId}
+	<select id="findByStatus" parameterType="map" resultMap="orderMapper">
+		SELECT o.id, o.ordernum, o.buyerId uid, o.totalprice, o.createdate, o.state, u.username 
+		FROM t_orders o INNER JOIN t_user u ON o.buyerId = u.id 
+		WHERE o.state = #{status}
+		LIMIT #{index}, #{size}		
 	</select>
-
-	<update id="updateStatus" parameterType="map">
-		UPDATE t_orders SET state = #{status} WHERE id = #{id}
-	</update>
 	
+	<select id="countByStatus" parameterType="int" resultType="int">
+		select count(1) from t_orders WHERE state = #{status}
+	</select>
 	
 	<select id="findById" parameterType="int" resultMap="orderMapper">
-		SELECT id, ordernum, buyerId, totalprice, createdate, state FROM t_orders WHERE id = #{id}
-	</select>
-
-	<select id="countPageOrder" parameterType="map" resultType="int">
-		SELECT COUNT(1) FROM((SELECT id from t_orders limit #{index}, #{size}) t)
-	</select>
-	
-	<select id="countPageOrderByBuyerId" parameterType="map" resultType="int">
-		SELECT COUNT(1) FROM((SELECT id from t_orders WHERE buyerId = #{buyerId} limit #{index},#{size}) t)
+		SELECT o.id, o.ordernum, o.buyerId uid, o.totalprice, o.createdate, o.state, u.username 
+		FROM t_orders o INNER JOIN t_user u ON o.buyerId = u.id 
+		WHERE o.id = #{orderId}
 	</select>
 	
 </mapper>
+
+
+
+
+
+
+

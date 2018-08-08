@@ -1,27 +1,22 @@
 package com.primeton.order.dao;
 
-import com.primeton.order.entity.TOrder;
+import java.util.List;
+import java.util.Map;
+
+import com.primeton.order.entity.Order;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.Map;
-
-/**
- * @Author: Usher
- * @Description:
- */
 @Mapper
 @Repository
-public interface IOrderDao {
+public interface IOrderDao extends IBaseDao<Order> {
 
-    public TOrder findById(Integer id);
+	public void updateStatus(Map<String, Object> statusInfo);
+	
+	public List<Order> findByStatus(Map<String, Object> info);
 
-    public void updateStatus(Map<String, Object> statusInfo);
-
-    public Integer countPageOrder(Map<String, Object> info);
-
-    public Integer countByBuyerId(Integer buyerId);
-
-    public Integer countPageOrderByBuyerId(Map<String, Object> info);
-
+	public Integer countByStatus(Integer status);
+	
+	public Order findById(Integer orderId);
+	
 }

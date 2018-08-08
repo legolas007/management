@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: order
   datasource:
     username: root
     #password: 123456
@@ -9,11 +11,26 @@ spring:
     # type: com.alibaba.druid.pool.DruidDataSource
     #druid：http://localhost:sell/druid
 
+  zipkin:
+    base-url: http://116.196.113.135:9411/
+  sleuth:
+    sampler:
+      percentage: 1
     #全局空值null不返回
   jackson:
     default-property-inclusion: non_null
 
+server:
+  port: 8089
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8762/eureka/
 
+#通过配置文件负载均衡
+#GOODS:
+  #ribbon:
+    #NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
 mybatis:
   # 指定全局配置文件位置
   config-location: classpath:mybatis/mybatis-config.xml

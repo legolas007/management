@@ -8,7 +8,7 @@ spring:
         service-id: config-server
       profile: dev
   zipkin:
-    base-url: http://localhost:9411/
+    base-url: http://116.196.113.135:9411/
   sleuth:
     sampler:
       percentage: 1

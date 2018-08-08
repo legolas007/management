@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.swing.text.html.HTML;
 import java.io.File;
 
 /**
@@ -26,7 +25,7 @@ public class CrudController {
     @Autowired
     private FeignLoginClient feignLoginClient;
 
-    @GetMapping("/bookdao")
+    @GetMapping("/findBookById")
     public TBook bookdao(Integer id) {
         return bookService.findBookById(id);
     }

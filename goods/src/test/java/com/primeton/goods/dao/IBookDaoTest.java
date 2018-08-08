@@ -2,8 +2,6 @@ package com.primeton.goods.dao;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 /**
  * @Author: Usher
  * @Description:

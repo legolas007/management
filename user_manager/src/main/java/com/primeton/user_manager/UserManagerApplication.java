@@ -30,8 +30,6 @@ public class UserManagerApplication {
 		LOGGER.info("serviceA");
 		return "serviceA";
 	}*/
-
-
 	@Bean
 	@LoadBalanced
 	RestTemplate restTemplate() {

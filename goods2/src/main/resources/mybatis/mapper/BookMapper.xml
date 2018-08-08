@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.primeton.goods.dao.IBookDao">
+
+	<resultMap type="books" id="bookMapper">
+		<id property="id" column="id"/>
+		<result property="bookname" column="bookname"/>
+		<result property="price" column="price"/>
+		<result property="stock" column="stock"/>
+		<result property="img" column="img"/>
+	</resultMap>
+
+	<select id="findAll" parameterType="map" resultMap="bookMapper">
+		SELECT id, bookname, price, stock, img FROM t_book WHERE isDelete = 0 LIMIT #{index}, #{size}
+	</select>
+
+	<update id="deleteBook" parameterType="int">
+		UPDATE t_book SET isDelete = 1 WHERE id = #{id}
+	</update>
+
+	<insert id="add" parameterType="books">
+		INSERT INTO t_book(bookname, price, stock, img) VALUES(#{bookname}, #{price}, #{stock}, #{img});
+	</insert>
+
+
+	<update id="update" parameterType="books">
+		UPDATE t_book
+		SET
+		bookname = #{bookname},
+		price = #{price},
+		stock = #{stock},
+		img = #{img}
+		WHERE id = #{id}
+	</update>
+
+	<select id="findByIndex" parameterType="map" resultMap="bookMapper">
+		SELECT id, bookname, price, stock, img FROM t_book WHERE isDelete = 0 LIMIT #{index}, #{size}	
+	</select>
+	
+	<select id="findByIds" parameterType="list" resultMap="bookMapper">
+		
+		select id, bookname, price, stock, img from t_book where id in 
+		<foreach collection="list" item="i" open="("  close=")" separator=",">
+			#{i}
+		</foreach>
+		
+	</select>
+	
+	<select id="findById" parameterType="int" resultMap="bookMapper">
+		select id, bookname, price, stock, img from t_book where id = #{id}		
+	</select>
+	
+	<select id="count" resultType="int">
+		select count(1) from t_book WHERE isDelete = 0	
+	</select>
+	
+	<update id="updateStock" parameterType="map">
+		UPDATE t_book SET stock = #{stock} WHERE id = #{id}
+	</update>
+	
+</mapper>

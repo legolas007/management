@@ -1,17 +1,22 @@
 package com.primeton.order.vo;
 
-import lombok.Data;
-
-import java.io.Serializable;
-
-/**
- * @Author: Usher
- * @Description:
- */
-@Data
-public class JsonBean implements Serializable {
-    private static final long serialVersionUID = -3905256492921863840L;
-    private Integer code;
-    private Object msg;
+public class JsonBean {
+	
+	private Integer code;
+	private Object msg;
+	public Integer getCode() {
+		return code;
+	}
+	public void setCode(Integer code) {
+		this.code = code;
+	}
+	public Object getMsg() {
+		return msg;
+	}
+	public void setMsg(Object msg) {
+		this.msg = msg;
+	}
+	
+	
 
 }

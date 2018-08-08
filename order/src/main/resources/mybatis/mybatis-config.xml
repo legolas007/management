@@ -16,10 +16,14 @@
 
     <!-- 设置类型的别名 -->
     <typeAliases>
-        <typeAlias type="com.qianfeng.entity.User" alias="user"/>
-        <typeAlias type="com.qianfeng.entity.Books" alias="books"/>
-        <typeAlias type="com.qianfeng.entity.Order" alias="order"/>
-        <typeAlias type="com.qianfeng.entity.OrderItem" alias="item"/>
+
+        <typeAlias type="com.primeton.order.entity.Book" alias="book"/>
+
+        <typeAlias type="com.primeton.order.entity.User" alias="user"/>
+
+        <typeAlias type="com.primeton.order.entity.Order" alias="order"/>
+
+        <typeAlias type="com.primeton.order.entity.OrderItem" alias="item"/>
 
 
     </typeAliases>

@@ -1,6 +1,6 @@
 spring:
   application:
-    name: user_manager
+    name: user
   cloud:
     config:
       discovery:

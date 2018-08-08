@@ -4,32 +4,34 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- 命名空间要唯一 -->
-<mapper namespace="com.qianfeng.dao.IUserDao"><!-- 命名空间习惯上命名为包名+类名的形式 -->
+<mapper namespace="com.primeton.order.dao.IUserDao"><!-- 命名空间习惯上命名为包名+类名的形式 -->
 	
 	<resultMap type="user" id="userMapper">
 		
 		<id property="id" column="id"/>
-		<result property="userName" column="username"/>
+		<result property="username" column="username"/>
 		<result property="password" column="password"/>
-		<result property="rePassWord" column="rePassWord"/>
 		<result property="email" column="email"/>
 		<result property="isLock" column="islock"/>
 		
 	</resultMap>
 	
-	<select id="findByName" parameterType="string" resultMap="userMapper">
-		SELECT id, username, password, email, islock FROM t_user WHERE username=#{name} 
+	<select id="findAll" parameterType="map" resultMap="userMapper">
+		SELECT id, username, password, email, isLock FROM t_user LIMIT #{index}, #{size}
 	</select>
 	
-	<insert id="add" parameterType="user">
-		INSERT INTO t_user(username,password,email) values(#{userName},#{password},#{email})
-	</insert>
 	
-	<update id="updateStatus" parameterType="map">
-		UPDATE t_user SET islock = #{islock} WHERE id = #{id};	
+	<update id="updateLockStatus" parameterType="int">
+		UPDATE t_user SET islock = 0 WHERE id = #{id};	
 	</update>
 	
+	<select id="count" resultType="int">		
+		select count(1) from t_user
+	</select>
 	
+	<select id="delete" parameterType="int">
+		DELETE FROM t_user WHERE id = #{id}
+	</select>
 	
 </mapper>
 
