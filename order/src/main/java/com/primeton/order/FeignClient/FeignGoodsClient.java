@@ -17,6 +17,6 @@ public interface FeignGoodsClient {
     @DeleteMapping("/deleteBook/{id}")
      JsonBean deleteBook(@PathVariable("id") Integer id);
 
-    @GetMapping("/findBookById{id}")
+    @GetMapping("/findBookById/{id}")
     JsonBean findBookById(@PathVariable("id")Integer id);
 }

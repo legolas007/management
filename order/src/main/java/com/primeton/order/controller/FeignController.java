@@ -21,7 +21,7 @@ public class FeignController {
     private FeignGoodsClient feignGoodsClient;
 
     @HystrixCommand(fallbackMethod = "fallback")
-    @GetMapping("/findBookById{id}")
+    @GetMapping("/findBookById/{id}")
     public JsonBean findBook(@PathVariable("id") Integer id) {
         return feignGoodsClient.findBookById(id);
     }
